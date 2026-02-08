@@ -19,51 +19,47 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfigurationSource;
 
-@Configuration @EnableWebSecurity @EnableMethodSecurity @RequiredArgsConstructor
+@Configuration
+@EnableWebSecurity
+@EnableMethodSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final UserDetailsService userDetailsService;
-    private final JwtRequestFilter jwtRequestFilter;
-    private final JwtAuthEntryPoint jwtAuthEntryPoint;
-    private final CorsConfigurationSource corsConfigurationSource;
+	private final UserDetailsService userDetailsService;
+	private final JwtRequestFilter jwtRequestFilter;
+	private final JwtAuthEntryPoint jwtAuthEntryPoint;
+	private final CorsConfigurationSource corsConfigurationSource;
 
-    @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService);
-        authProvider.setPasswordEncoder(passwordEncoder());
-        return authProvider;
-    }
+	@Bean
+	DaoAuthenticationProvider authenticationProvider() {
+		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+		authProvider.setUserDetailsService(userDetailsService);
+		authProvider.setPasswordEncoder(passwordEncoder());
+		return authProvider;
+	}
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) 
-            throws Exception {
-        return authConfig.getAuthenticationManager();
-    }
+	@Bean
+	AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+		return authConfig.getAuthenticationManager();
+	}
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-            .cors(cors -> cors.configurationSource(corsConfigurationSource))
-            .csrf(csrf -> csrf.disable())
-            .exceptionHandling(exception -> exception
-                    .authenticationEntryPoint(jwtAuthEntryPoint))
-            .sessionManagement(session -> session
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/api/auth/**").permitAll()
-                    .requestMatchers("/api/orders/qr").permitAll()
-                    .requestMatchers("/swagger-ui/**", "/api-docs/**").permitAll()
-                    .requestMatchers("/api/kitchen/**").hasAnyRole("CHEF", "ADMIN")
-                    .requestMatchers("/api/bookings/**").hasAnyRole("WAITER", "ADMIN", "MANAGER")
-                    .anyRequest().authenticated())
-            .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+	@Bean
+	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		http.cors(cors -> cors.configurationSource(corsConfigurationSource)).csrf(csrf -> csrf.disable())
+				.exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint))
+				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.authorizeHttpRequests(auth -> auth.requestMatchers("/api/auth/**").permitAll()
+						.requestMatchers("/api/orders/qr").permitAll().requestMatchers("/swagger-ui/**", "/api-docs/**")
+						.permitAll().requestMatchers("/api/kitchen/**").hasAnyRole("CHEF", "ADMIN")
+						.requestMatchers("/api/bookings/**").hasAnyRole("WAITER", "ADMIN", "MANAGER").anyRequest()
+						.authenticated())
+				.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
-        return http.build();
-    }
+		return http.build();
+	}
 }

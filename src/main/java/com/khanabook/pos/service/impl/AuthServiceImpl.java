@@ -1,5 +1,14 @@
 package com.khanabook.pos.service.impl;
 
+import java.time.LocalDateTime;
+
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.khanabook.pos.dto.request.AuthRequest;
 import com.khanabook.pos.dto.request.RegisterRequest;
 import com.khanabook.pos.dto.response.AuthResponse;
@@ -9,30 +18,20 @@ import com.khanabook.pos.model.User;
 import com.khanabook.pos.repository.UserRepository;
 import com.khanabook.pos.security.JwtUtil;
 import com.khanabook.pos.service.AuthService;
+
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-
-
-
-@Service @RequiredArgsConstructor
+@Service
+@RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
-    private final UserDetailsService userDetailsService;
 
-    @Override @Transactional
+    @Override
+    @Transactional
     public AuthResponse register(RegisterRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) {
             throw new IllegalArgumentException("Username already exists");
@@ -48,7 +47,7 @@ public class AuthServiceImpl implements AuthService {
                 .email(request.getEmail())
                 .phoneNumber(request.getPhoneNumber())
                 .fullName(request.getFullName())
-                .role(Role.ROLE_WAITER) // Default role
+                .role(Role.WAITER) // Default role
                 .active(true)
                 .build();
 
@@ -57,18 +56,18 @@ public class AuthServiceImpl implements AuthService {
         // Generate token immediately
         String token = jwtUtil.generateToken(user);
 
-        return new AuthResponse(token, "Bearer", user.getId(), user.getUsername(), user.getEmail(), user.getRole().name());
+        return new AuthResponse(token, "Bearer", user.getId(), user.getUsername(), user.getEmail(),
+                user.getRole().name());
     }
 
-    @Override @Transactional
+    @Override
+    @Transactional
     public AuthResponse authenticate(AuthRequest request) {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             request.getUsername(),
-                            request.getPassword()
-                    )
-            );
+                            request.getPassword()));
         } catch (BadCredentialsException e) {
             throw new BadCredentialsException("Invalid username or password");
         }
@@ -81,6 +80,7 @@ public class AuthServiceImpl implements AuthService {
 
         String token = jwtUtil.generateToken(user);
 
-        return new AuthResponse(token, "Bearer", user.getId(), user.getUsername(), user.getEmail(), user.getRole().name());
+        return new AuthResponse(token, "Bearer", user.getId(), user.getUsername(), user.getEmail(),
+                user.getRole().name());
     }
 }

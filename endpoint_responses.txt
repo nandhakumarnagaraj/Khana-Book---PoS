@@ -1,0 +1,595 @@
+Endpoint: POST /auth/register
+Status: 201
+Response: {
+  "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0ZXJfMTc3MDU2OTM0MSIsImlhdCI6MTc3MDU2OTM0MiwiZXhwIjoxNzcwNTcyOTQyfQ.HXGwj3x2XN_Cw8wPkFPuuYNXsz01Jo88qf0CdKUim7s",
+  "type": "Bearer",
+  "id": 15,
+  "username": "tester_1770569341",
+  "email": "tester_1770569341@example.com",
+  "role": "WAITER"
+}
+--------------------------------------------------
+Endpoint: GET /users
+Status: 200
+Response: {
+  "content": [
+    {
+      "id": 1,
+      "username": "superadmin",
+      "email": "superadmin@khanabook.com",
+      "phoneNumber": "+919999999999",
+      "fullName": "Super Administrator",
+      "role": "ADMIN",
+      "active": true,
+      "createdAt": "2026-02-08T21:29:24.081589",
+      "lastLogin": "2026-02-08T22:09:08.464939"
+    },
+    {
+      "id": 2,
+      "username": "admin",
+      "email": "admin@khanabook.com",
+      "phoneNumber": "+919999999998",
+      "fullName": "Restaurant Admin",
+      "role": "ADMIN",
+      "active": true,
+      "createdAt": "2026-02-08T21:29:24.465465",
+      "lastLogin": "2026-02-08T22:19:01.323745"
+    },
+    {
+      "id": 3,
+      "username": "manager",
+      "email": "manager@khanabook.com",
+      "phoneNumber": "+919999999997",
+      "fullName": "Restaurant Manager",
+      "role": "MANAGER",
+      "active": true,
+      "createdAt": "2026-02-08T21:29:24.773653",
+      "lastLogin": "2026-02-08T22:09:08.662431"
+    },
+    {
+      "id": 4,
+      "username": "chef_ravi",
+      "email": "chef@khanabook.com",
+      "phoneNumber": "+919999999996",
+      "fullName": "Chef Ravi Kumar",
+      "role": "CHEF",
+      "active": true,
+      "createdAt": "2026-02-08T21:29:25.034538",
+      "lastLogin": "2026-02-08T22:08:29.600587"
+    },
+    {
+      "id": 5,
+      "username": "waiter_rahul",
+      "email": "waiter@khanabook.com",
+      "phoneNumber": "+919999999995",
+      "fullName": "Rahul Sharma",
+      "role": "WAITER",
+      "active": true,
+      "createdAt": "2026-02-08T21:29:25.284931",
+      "lastLogin": "2026-02-08T22:19:01.805631"
+    },
+    {
+      "id": 6,
+      "username": "cashier_priya",
+      "email": "cashier@khanabook.com",
+      "phoneNumber": "+919999999994",
+      "fullName": "Priya Singh",
+      "role": "CASHIER",
+      "active": true,
+      "createdAt": "2026-02-08T21:29:25.506725",
+      "lastLogin": null
+    },
+    {
+      "id": 7,
+      "username": "owner",
+      "email": "owner@khanabook.com",
+      "phoneNumber": "+919999999993",
+      "fullName": "Restaurant Owner",
+      "role": "MANAGER",
+      "active": true,
+      "createdAt": "2026-02-08T21:29:25.732285",
+      "lastLogin": null
+    },
+    {
+      "id": 8,
+      "username": "head_chef",
+      "email": "headchef@khanabook.com",
+      "phoneNumber": "+919999999992",
+      "fullName": "Head Chef Amit",
+      "role": "MANAGER",
+      "active": true,
+      "createdAt": "2026-02-08T21:29:26.055913",
+      "lastLogin": null
+    },
+    {
+      "id": 9,
+      "username": "tester_1770568748",
+      "email": "tester_1770568748@example.com",
+      "phoneNumber": "1234567890",
+      "fullName": "Tester User",
+      "role": "WAITER",
+      "active": true,
+      "createdAt": "2026-02-08T22:09:09.193524",
+      "lastLogin": "2026-02-08T22:09:09.461112"
+    },
+    {
+      "id": 10,
+      "username": "tester_1770568796",
+      "email": "tester_1770568796@example.com",
+      "phoneNumber": "1234567890",
+      "fullName": "Tester User",
+      "role": "WAITER",
+      "active": true,
+      "createdAt": "2026-02-08T22:09:56.866289",
+      "lastLogin": null
+    },
+    {
+      "id": 11,
+      "username": "tester_1770568831",
+      "email": "tester_1770568831@example.com",
+      "phoneNumber": "1234567890",
+      "fullName": "Tester User",
+      "role": "WAITER",
+      "active": true,
+      "createdAt": "2026-02-08T22:10:31.712494",
+      "lastLogin": null
+    },
+    {
+      "id": 12,
+      "username": "tester_1770569140",
+      "email": "tester_1770569140@example.com",
+      "phoneNumber": "1234567890",
+      "fullName": "Tester User",
+      "role": "WAITER",
+      "active": true,
+      "createdAt": "2026-02-08T22:15:40.597098",
+      "lastLogin": null
+    },
+    {
+      "id": 13,
+      "username": "tester_1770569171",
+      "email": "tester_1770569171@example.com",
+      "phoneNumber": "1234567890",
+      "fullName": "Tester User",
+      "role": "WAITER",
+      "active": true,
+      "createdAt": "2026-02-08T22:16:11.711287",
+      "lastLogin": null
+    },
+    {
+      "id": 14,
+      "username": "tester_1770569210",
+      "email": "tester_1770569210@example.com",
+      "phoneNumber": "1234567890",
+      "fullName": "Tester User",
+      "role": "WAITER",
+      "active": true,
+      "createdAt": "2026-02-08T22:16:50.330286",
+      "lastLogin": null
+    },
+    {
+      "id": 15,
+      "username": "tester_1770569341",
+      "email": "tester_1770569341@example.com",
+      "phoneNumber": "1234567890",
+      "fullName": "Tester User",
+      "role": "WAITER",
+      "active": true,
+      "createdAt": "2026-02-08T22:19:02.120551",
+      "lastLogin": null
+    }
+  ],
+  "pageable": {
+    "pageNumber": 0,
+    "pageSize": 20,
+    "sort": {
+      "empty": true,
+      "sorted": false,
+      "unsorted": true
+    },
+    "offset": 0,
+    "unpaged": false,
+    "paged": true
+  },
+  "last": true,
+  "totalElements": 15,
+  "totalPages": 1,
+  "size": 20,
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": false,
+    "unsorted": true
+  },
+  "numberOfElements": 15,
+  "first": true,
+  "empty": false
+}
+--------------------------------------------------
+Endpoint: POST /categories
+Status: 201
+Response: {
+  "id": 4,
+  "name": "Test Category 1770569342",
+  "description": "Test Description",
+  "active": true,
+  "displayOrder": null,
+  "createdAt": "2026-02-08T22:19:02.8036319"
+}
+--------------------------------------------------
+Endpoint: GET /categories
+Status: 200
+Response: [
+  {
+    "id": 1,
+    "name": "Test Category 1770569140",
+    "description": "Test Description",
+    "active": true,
+    "displayOrder": null,
+    "createdAt": "2026-02-08T22:15:40.875663"
+  },
+  {
+    "id": 2,
+    "name": "Test Category 1770569171",
+    "description": "Test Description",
+    "active": true,
+    "displayOrder": null,
+    "createdAt": "2026-02-08T22:16:11.792672"
+  },
+  {
+    "id": 3,
+    "name": "Test Category 1770569210",
+    "description": "Test Description",
+    "active": true,
+    "displayOrder": null,
+    "createdAt": "2026-02-08T22:16:50.438515"
+  },
+  {
+    "id": 4,
+    "name": "Test Category 1770569342",
+    "description": "Test Description",
+    "active": true,
+    "displayOrder": null,
+    "createdAt": "2026-02-08T22:19:02.803632"
+  }
+]
+--------------------------------------------------
+Endpoint: POST /tables
+Status: 201
+Response: {
+  "id": 3,
+  "name": "T-342",
+  "status": "AVAILABLE",
+  "capacity": 4,
+  "qrCode": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsAQAAAABRBrPYAAACAElEQVR4Xu2YO24DMQxEabhw6SPoKDqadLQ9yh4hpYtgGc5QtmHZQFIGGLFZreapIfiTzP9iXzbvfLSFTbawyRY22cIm+//YZrDinXtbO84hWOOuNUWMy7LZkcrp+xJ/7fTU5DCzELzbGb/u34DbKT5FGQu/nW8Ago5DLo9BuOCfdJXGsCyZS7vF3s1w6KmpYYweYKPG5Ie7pog9LfQQogRfX7bVMPgNenQh6D39hsJz3asihjkldpBSLLoxrvhee+ZZU8T8gN9qzw/jKfzmWYkVsTGn4AOMXYjugxcFsW2MsJlLkWCIp+hCk9+EsIYag1wCzbDKzMKhJoh5dqGIoJhTohmNOSXPYi2HdVZbNCM4LAfaoNOLgti469Tu6M4jz+7xJIm1rL0MpIISfGOevSWgChbC3cJTEHjlSRq6HoaUygRjBOWlGK9KhbocxskkhYwgz5vPa2bpYOg73GGN2Yb+lllKGJcPh3HCfzhTEkONcToMgjGeHC+wBboiNgYUhE5l4dnjP88KYsM2CHnzGVceDC+KGHQbz87hMLjP4MVpwhfCoKO48OZjDKv026fHeQlsRBAcVjyHFziTHUoYY1t2dCEGEipxwb8uhnGFTRqBBC9OmaWDYRlCfhquPJaPKAW6Hmawu6ewRma1A28pVRH71RY22cImW9hkC5tMCPsBFw5kgbo3bxEAAAAASUVORK5CYII=",
+  "qrToken": "5827b2e6-3741-4836-ac90-3fa56951e413",
+  "location": null,
+  "section": null,
+  "createdAt": "2026-02-08T22:19:02.9080738"
+}
+--------------------------------------------------
+Endpoint: GET /tables
+Status: 200
+Response: [
+  {
+    "id": 1,
+    "name": "T-171",
+    "status": "AVAILABLE",
+    "capacity": 4,
+    "qrCode": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsAQAAAABRBrPYAAACB0lEQVR4Xu2YO27DMBBE11ChMkfgUXQ06Wg6io+QMkXgzbylZcNMgKQMMNpGJOfZxWJ/ZORf7D3Gkx/txAY7scFObLATG+z/Y3tgLTdOWuZtkhBrncbqiNWy7XGLOa/LdvmctVsvT80Oi5CQW0yZV3nqsxx20ac5Y/Lb9PF2FTFVPNljCOU+0RGLNcaykUv4bS1dP3pqblhgYPca0z91Go7Y06RLIMFejt0w/IYeiiDpG8JReBZHTF0oZj6lZ7KjSWdvTYZYhqotngqsBO0UVl21w/aVwY146uOKSjC1l7m2WWK5Icgql4K5lto7+s0Jq8zaKTU4rNxHZlWvNsTKRdReNtLrpzTpeC3RNthx15HfKLqJ+1Rx+nhrimGLxpUgs+56vyI7YqQUmbVy0vAic8r3zLLB6Dt058dMf1QcaGQ3TJNJMtP3BEP4IKwYXlr9ixuWjLBEkIQeQVk3nzEBbTBNslPHqTF9mvshs4ywR0oRQWRWr708SS8Ahth9ku1COUx6rziWWF3+JFBxemu6cjKjGWJ3q5Q6IqhJ5xHFEtvxEa8E2R32GGiHi4APtrJUM+oRhMMYXo6PI1bdmZ7Ee8mG+8qZ82t39sOquNQkq+WRZ86YAknNqOJJfjt6kiPGUtjDU6ULi9r5YYG1ejnCmPC1ux0XIDvsVzuxwU5ssBMb7MQGM8K+AHOyPjI3hfqHAAAAAElFTkSuQmCC",
+    "qrToken": "2a51a48c-39df-43c2-9a05-40368670eb87",
+    "location": null,
+    "section": null,
+    "createdAt": "2026-02-08T22:16:11.905699"
+  },
+  {
+    "id": 2,
+    "name": "T-210",
+    "status": "AVAILABLE",
+    "capacity": 4,
+    "qrCode": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsAQAAAABRBrPYAAACAUlEQVR4Xu2ZMW7DMAxFGWTI6CPoKD6adTQfJUfomKGwykfKDaoEaMcCXxwii/95IUiKVqz9xT5s9Ly1iQ02scEmNtjEBvv/2G5YaTV8+3ZcXbAtvLYpYvFYdjvwr+3yefPddnlqcpiZC63ala1jETCWoox53K6P5e6EJ1JJWhpDiPA5nfmki/FYopboMaH7S09NDTMMrPeYXMJritjTPm/tjvBYfrjVMOJ28wyyzKDaIm7ZeFZFrFXX3VNj0xpnku+orIiiHEaPodtWH1eWLnjcSKs0NYxTCJ1jOXb+UmmNubboYvZdS7X33rdxk8A8ZxqD23kKHWdlhVMRC91C8GzKgOGk/wDIYRm3NU4hn2SNgbZHEV0P80gZvbd3HOZa1w/z4WWVxOLXPalX40x6U1lCGF99xeeUsIgiu5cxTwZjXCGDaLqNY5nhpXGrVMKhhrll7835LSrLwzdWlg52njs5p5w95rWyhLAjvgHTkws0V9IrgB7WJxOPG6lz9pjsOJoYkWKSpcdUfF5g5vnkmiDWbT+FuIjdOZMWTQzd+Aa85IR/LplditjGY2FAIYMIGBex56KIZepY3rlyJmUwx9NZDoul/30T4wrBFMaylqKyvMdQZ0Nl6WA8etyY38yF7DF0nIKuhxlW+k2jQfNu3q8pYr/axAab2GATG2xigwlhX5XzSr/0wS4/AAAAAElFTkSuQmCC",
+    "qrToken": "044bcc01-09d4-4a91-a31c-2f4b764f3879",
+    "location": null,
+    "section": null,
+    "createdAt": "2026-02-08T22:16:50.516233"
+  },
+  {
+    "id": 3,
+    "name": "T-342",
+    "status": "AVAILABLE",
+    "capacity": 4,
+    "qrCode": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsAQAAAABRBrPYAAACAElEQVR4Xu2YO24DMQxEabhw6SPoKDqadLQ9yh4hpYtgGc5QtmHZQFIGGLFZreapIfiTzP9iXzbvfLSFTbawyRY22cIm+//YZrDinXtbO84hWOOuNUWMy7LZkcrp+xJ/7fTU5DCzELzbGb/u34DbKT5FGQu/nW8Ago5DLo9BuOCfdJXGsCyZS7vF3s1w6KmpYYweYKPG5Ie7pog9LfQQogRfX7bVMPgNenQh6D39hsJz3asihjkldpBSLLoxrvhee+ZZU8T8gN9qzw/jKfzmWYkVsTGn4AOMXYjugxcFsW2MsJlLkWCIp+hCk9+EsIYag1wCzbDKzMKhJoh5dqGIoJhTohmNOSXPYi2HdVZbNCM4LAfaoNOLgti469Tu6M4jz+7xJIm1rL0MpIISfGOevSWgChbC3cJTEHjlSRq6HoaUygRjBOWlGK9KhbocxskkhYwgz5vPa2bpYOg73GGN2Yb+lllKGJcPh3HCfzhTEkONcToMgjGeHC+wBboiNgYUhE5l4dnjP88KYsM2CHnzGVceDC+KGHQbz87hMLjP4MVpwhfCoKO48OZjDKv026fHeQlsRBAcVjyHFziTHUoYY1t2dCEGEipxwb8uhnGFTRqBBC9OmaWDYRlCfhquPJaPKAW6Hmawu6ewRma1A28pVRH71RY22cImW9hkC5tMCPsBFw5kgbo3bxEAAAAASUVORK5CYII=",
+    "qrToken": "5827b2e6-3741-4836-ac90-3fa56951e413",
+    "location": null,
+    "section": null,
+    "createdAt": "2026-02-08T22:19:02.908074"
+  }
+]
+--------------------------------------------------
+Endpoint: GET /tables/3
+Status: 200
+Response: {
+  "id": 3,
+  "name": "T-342",
+  "status": "AVAILABLE",
+  "capacity": 4,
+  "qrCode": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsAQAAAABRBrPYAAACAElEQVR4Xu2YO24DMQxEabhw6SPoKDqadLQ9yh4hpYtgGc5QtmHZQFIGGLFZreapIfiTzP9iXzbvfLSFTbawyRY22cIm+//YZrDinXtbO84hWOOuNUWMy7LZkcrp+xJ/7fTU5DCzELzbGb/u34DbKT5FGQu/nW8Ago5DLo9BuOCfdJXGsCyZS7vF3s1w6KmpYYweYKPG5Ie7pog9LfQQogRfX7bVMPgNenQh6D39hsJz3asihjkldpBSLLoxrvhee+ZZU8T8gN9qzw/jKfzmWYkVsTGn4AOMXYjugxcFsW2MsJlLkWCIp+hCk9+EsIYag1wCzbDKzMKhJoh5dqGIoJhTohmNOSXPYi2HdVZbNCM4LAfaoNOLgti469Tu6M4jz+7xJIm1rL0MpIISfGOevSWgChbC3cJTEHjlSRq6HoaUygRjBOWlGK9KhbocxskkhYwgz5vPa2bpYOg73GGN2Yb+lllKGJcPh3HCfzhTEkONcToMgjGeHC+wBboiNgYUhE5l4dnjP88KYsM2CHnzGVceDC+KGHQbz87hMLjP4MVpwhfCoKO48OZjDKv026fHeQlsRBAcVjyHFziTHUoYY1t2dCEGEipxwb8uhnGFTRqBBC9OmaWDYRlCfhquPJaPKAW6Hmawu6ewRma1A28pVRH71RY22cImW9hkC5tMCPsBFw5kgbo3bxEAAAAASUVORK5CYII=",
+  "qrToken": "5827b2e6-3741-4836-ac90-3fa56951e413",
+  "location": null,
+  "section": null,
+  "createdAt": "2026-02-08T22:19:02.908074"
+}
+--------------------------------------------------
+Endpoint: POST /menu-items
+Status: 201
+Response: {
+  "id": 4,
+  "name": "Chicken Wings 1770569343",
+  "description": "Spicy wings",
+  "price": 12.99,
+  "category": {
+    "id": 4,
+    "name": "Test Category 1770569342",
+    "description": "Test Description",
+    "active": true,
+    "displayOrder": null,
+    "createdAt": "2026-02-08T22:19:02.803632"
+  },
+  "imageLob": null,
+  "available": true,
+  "vegetarian": false,
+  "vegan": false,
+  "spiceLevel": null,
+  "createdAt": "2026-02-08T22:19:03.5606528"
+}
+--------------------------------------------------
+Endpoint: GET /menu-items/4
+Status: 200
+Response: {
+  "id": 4,
+  "name": "Chicken Wings 1770569343",
+  "description": "Spicy wings",
+  "price": 12.99,
+  "category": {
+    "id": 4,
+    "name": "Test Category 1770569342",
+    "description": "Test Description",
+    "active": true,
+    "displayOrder": null,
+    "createdAt": "2026-02-08T22:19:02.803632"
+  },
+  "imageLob": null,
+  "available": true,
+  "vegetarian": false,
+  "vegan": false,
+  "spiceLevel": null,
+  "createdAt": "2026-02-08T22:19:03.560653"
+}
+--------------------------------------------------
+Endpoint: GET /menu-items
+Status: 200
+Response: {
+  "content": [
+    {
+      "id": 1,
+      "name": "Chicken Wings 1770569141",
+      "description": "Spicy wings",
+      "price": 12.99,
+      "category": {
+        "id": 1,
+        "name": "Test Category 1770569140",
+        "description": "Test Description",
+        "active": true,
+        "displayOrder": null,
+        "createdAt": "2026-02-08T22:15:40.875663"
+      },
+      "imageLob": null,
+      "available": true,
+      "vegetarian": false,
+      "vegan": false,
+      "spiceLevel": null,
+      "createdAt": "2026-02-08T22:15:41.27321"
+    },
+    {
+      "id": 2,
+      "name": "Chicken Wings 1770569172",
+      "description": "Spicy wings",
+      "price": 12.99,
+      "category": {
+        "id": 2,
+        "name": "Test Category 1770569171",
+        "description": "Test Description",
+        "active": true,
+        "displayOrder": null,
+        "createdAt": "2026-02-08T22:16:11.792672"
+      },
+      "imageLob": null,
+      "available": true,
+      "vegetarian": false,
+      "vegan": false,
+      "spiceLevel": null,
+      "createdAt": "2026-02-08T22:16:12.814642"
+    },
+    {
+      "id": 3,
+      "name": "Chicken Wings 1770569210",
+      "description": "Spicy wings",
+      "price": 12.99,
+      "category": {
+        "id": 3,
+        "name": "Test Category 1770569210",
+        "description": "Test Description",
+        "active": true,
+        "displayOrder": null,
+        "createdAt": "2026-02-08T22:16:50.438515"
+      },
+      "imageLob": null,
+      "available": true,
+      "vegetarian": false,
+      "vegan": false,
+      "spiceLevel": null,
+      "createdAt": "2026-02-08T22:16:50.668564"
+    },
+    {
+      "id": 4,
+      "name": "Chicken Wings 1770569343",
+      "description": "Spicy wings",
+      "price": 12.99,
+      "category": {
+        "id": 4,
+        "name": "Test Category 1770569342",
+        "description": "Test Description",
+        "active": true,
+        "displayOrder": null,
+        "createdAt": "2026-02-08T22:19:02.803632"
+      },
+      "imageLob": null,
+      "available": true,
+      "vegetarian": false,
+      "vegan": false,
+      "spiceLevel": null,
+      "createdAt": "2026-02-08T22:19:03.560653"
+    }
+  ],
+  "pageable": {
+    "pageNumber": 0,
+    "pageSize": 20,
+    "sort": {
+      "empty": true,
+      "sorted": false,
+      "unsorted": true
+    },
+    "offset": 0,
+    "unpaged": false,
+    "paged": true
+  },
+  "last": true,
+  "totalElements": 4,
+  "totalPages": 1,
+  "size": 20,
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": false,
+    "unsorted": true
+  },
+  "numberOfElements": 4,
+  "first": true,
+  "empty": false
+}
+--------------------------------------------------
+Endpoint: POST /bookings
+Status: 201
+Response: {
+  "id": 2,
+  "restaurantTable": {
+    "id": 3,
+    "name": "T-342",
+    "status": "AVAILABLE",
+    "capacity": 4,
+    "qrCode": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsAQAAAABRBrPYAAACAElEQVR4Xu2YO24DMQxEabhw6SPoKDqadLQ9yh4hpYtgGc5QtmHZQFIGGLFZreapIfiTzP9iXzbvfLSFTbawyRY22cIm+//YZrDinXtbO84hWOOuNUWMy7LZkcrp+xJ/7fTU5DCzELzbGb/u34DbKT5FGQu/nW8Ago5DLo9BuOCfdJXGsCyZS7vF3s1w6KmpYYweYKPG5Ie7pog9LfQQogRfX7bVMPgNenQh6D39hsJz3asihjkldpBSLLoxrvhee+ZZU8T8gN9qzw/jKfzmWYkVsTGn4AOMXYjugxcFsW2MsJlLkWCIp+hCk9+EsIYag1wCzbDKzMKhJoh5dqGIoJhTohmNOSXPYi2HdVZbNCM4LAfaoNOLgti469Tu6M4jz+7xJIm1rL0MpIISfGOevSWgChbC3cJTEHjlSRq6HoaUygRjBOWlGK9KhbocxskkhYwgz5vPa2bpYOg73GGN2Yb+lllKGJcPh3HCfzhTEkONcToMgjGeHC+wBboiNgYUhE5l4dnjP88KYsM2CHnzGVceDC+KGHQbz87hMLjP4MVpwhfCoKO48OZjDKv026fHeQlsRBAcVjyHFziTHUoYY1t2dCEGEipxwb8uhnGFTRqBBC9OmaWDYRlCfhquPJaPKAW6Hmawu6ewRma1A28pVRH71RY22cImW9hkC5tMCPsBFw5kgbo3bxEAAAAASUVORK5CYII=",
+    "qrToken": "5827b2e6-3741-4836-ac90-3fa56951e413",
+    "location": null,
+    "section": null,
+    "createdAt": "2026-02-08T22:19:02.908074"
+  },
+  "customerName": "John Doe",
+  "customerPhone": "9876543210",
+  "customerEmail": null,
+  "partySize": 2,
+  "bookingDateTime": "2026-12-31T20:00:00",
+  "status": "PENDING",
+  "createdAt": "2026-02-08T22:19:03.9556366",
+  "confirmedAt": null,
+  "specialRequests": null,
+  "customerOrder": null
+}
+--------------------------------------------------
+Endpoint: GET /bookings
+Status: 200
+Response: {
+  "content": [
+    {
+      "id": 1,
+      "restaurantTable": {
+        "id": 2,
+        "name": "T-210",
+        "status": "AVAILABLE",
+        "capacity": 4,
+        "qrCode": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsAQAAAABRBrPYAAACAUlEQVR4Xu2ZMW7DMAxFGWTI6CPoKD6adTQfJUfomKGwykfKDaoEaMcCXxwii/95IUiKVqz9xT5s9Ly1iQ02scEmNtjEBvv/2G5YaTV8+3ZcXbAtvLYpYvFYdjvwr+3yefPddnlqcpiZC63ala1jETCWoox53K6P5e6EJ1JJWhpDiPA5nfmki/FYopboMaH7S09NDTMMrPeYXMJritjTPm/tjvBYfrjVMOJ28wyyzKDaIm7ZeFZFrFXX3VNj0xpnku+orIiiHEaPodtWH1eWLnjcSKs0NYxTCJ1jOXb+UmmNubboYvZdS7X33rdxk8A8ZxqD23kKHWdlhVMRC91C8GzKgOGk/wDIYRm3NU4hn2SNgbZHEV0P80gZvbd3HOZa1w/z4WWVxOLXPalX40x6U1lCGF99xeeUsIgiu5cxTwZjXCGDaLqNY5nhpXGrVMKhhrll7835LSrLwzdWlg52njs5p5w95rWyhLAjvgHTkws0V9IrgB7WJxOPG6lz9pjsOJoYkWKSpcdUfF5g5vnkmiDWbT+FuIjdOZMWTQzd+Aa85IR/LplditjGY2FAIYMIGBex56KIZepY3rlyJmUwx9NZDoul/30T4wrBFMaylqKyvMdQZ0Nl6WA8etyY38yF7DF0nIKuhxlW+k2jQfNu3q8pYr/axAab2GATG2xigwlhX5XzSr/0wS4/AAAAAElFTkSuQmCC",
+        "qrToken": "044bcc01-09d4-4a91-a31c-2f4b764f3879",
+        "location": null,
+        "section": null,
+        "createdAt": "2026-02-08T22:16:50.516233"
+      },
+      "customerName": "John Doe",
+      "customerPhone": "9876543210",
+      "customerEmail": null,
+      "partySize": 2,
+      "bookingDateTime": "2026-12-31T20:00:00",
+      "status": "PENDING",
+      "createdAt": "2026-02-08T22:16:50.836774",
+      "confirmedAt": null,
+      "specialRequests": null,
+      "customerOrder": null
+    },
+    {
+      "id": 2,
+      "restaurantTable": {
+        "id": 3,
+        "name": "T-342",
+        "status": "AVAILABLE",
+        "capacity": 4,
+        "qrCode": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsAQAAAABRBrPYAAACAElEQVR4Xu2YO24DMQxEabhw6SPoKDqadLQ9yh4hpYtgGc5QtmHZQFIGGLFZreapIfiTzP9iXzbvfLSFTbawyRY22cIm+//YZrDinXtbO84hWOOuNUWMy7LZkcrp+xJ/7fTU5DCzELzbGb/u34DbKT5FGQu/nW8Ago5DLo9BuOCfdJXGsCyZS7vF3s1w6KmpYYweYKPG5Ie7pog9LfQQogRfX7bVMPgNenQh6D39hsJz3asihjkldpBSLLoxrvhee+ZZU8T8gN9qzw/jKfzmWYkVsTGn4AOMXYjugxcFsW2MsJlLkWCIp+hCk9+EsIYag1wCzbDKzMKhJoh5dqGIoJhTohmNOSXPYi2HdVZbNCM4LAfaoNOLgti469Tu6M4jz+7xJIm1rL0MpIISfGOevSWgChbC3cJTEHjlSRq6HoaUygRjBOWlGK9KhbocxskkhYwgz5vPa2bpYOg73GGN2Yb+lllKGJcPh3HCfzhTEkONcToMgjGeHC+wBboiNgYUhE5l4dnjP88KYsM2CHnzGVceDC+KGHQbz87hMLjP4MVpwhfCoKO48OZjDKv026fHeQlsRBAcVjyHFziTHUoYY1t2dCEGEipxwb8uhnGFTRqBBC9OmaWDYRlCfhquPJaPKAW6Hmawu6ewRma1A28pVRH71RY22cImW9hkC5tMCPsBFw5kgbo3bxEAAAAASUVORK5CYII=",
+        "qrToken": "5827b2e6-3741-4836-ac90-3fa56951e413",
+        "location": null,
+        "section": null,
+        "createdAt": "2026-02-08T22:19:02.908074"
+      },
+      "customerName": "John Doe",
+      "customerPhone": "9876543210",
+      "customerEmail": null,
+      "partySize": 2,
+      "bookingDateTime": "2026-12-31T20:00:00",
+      "status": "PENDING",
+      "createdAt": "2026-02-08T22:19:03.955637",
+      "confirmedAt": null,
+      "specialRequests": null,
+      "customerOrder": null
+    }
+  ],
+  "pageable": {
+    "pageNumber": 0,
+    "pageSize": 20,
+    "sort": {
+      "empty": true,
+      "sorted": false,
+      "unsorted": true
+    },
+    "offset": 0,
+    "unpaged": false,
+    "paged": true
+  },
+  "last": true,
+  "totalElements": 2,
+  "totalPages": 1,
+  "size": 20,
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": false,
+    "unsorted": true
+  },
+  "numberOfElements": 2,
+  "first": true,
+  "empty": false
+}
+--------------------------------------------------
+Endpoint: GET /kitchen/orders/pending
+Status: 200
+Response: []
+--------------------------------------------------
+Endpoint: GET /reports/order-status-count
+Status: 200
+Response: {}
+--------------------------------------------------

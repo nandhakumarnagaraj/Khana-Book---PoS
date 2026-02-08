@@ -1,0 +1,27 @@
+{"properties": [
+  {
+    "name": "jwt.secret",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.secret'"
+  },
+  {
+    "name": "cors.allowed-origins",
+    "type": "java.lang.String",
+    "description": "A description for 'cors.allowed-origins'"
+  },
+  {
+    "name": "jwt.expiration",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.expiration'"
+  },
+  {
+    "name": "qr.code.size",
+    "type": "java.lang.String",
+    "description": "A description for 'qr.code.size'"
+  },
+  {
+    "name": "qr.code.base-url",
+    "type": "java.lang.String",
+    "description": "A description for 'qr.code.base-url'"
+  }
+]}

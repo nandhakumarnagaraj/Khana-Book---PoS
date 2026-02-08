@@ -5,15 +5,22 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity(name = "table_bookings")
-@Data @NoArgsConstructor @AllArgsConstructor @Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class TableBooking {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "table_id", nullable = false)
+    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     private RestaurantTable restaurantTable;
 
     @Column(nullable = false)
@@ -39,7 +46,8 @@ public class TableBooking {
     private LocalDateTime confirmedAt;
     private String specialRequests;
 
-    @OneToOne @JoinColumn(name = "order_id")
+    @OneToOne
+    @JoinColumn(name = "order_id")
     private CustomerOrder customerOrder;
 
     @PrePersist

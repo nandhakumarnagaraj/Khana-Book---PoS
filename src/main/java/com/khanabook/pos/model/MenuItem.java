@@ -7,10 +7,14 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity(name = "menu_items")
-@Data @NoArgsConstructor @AllArgsConstructor @Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class MenuItem {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -22,11 +26,11 @@ public class MenuItem {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     private Category category;
 
     @Lob
-    @Column(name = "image_data", columnDefinition = "LONGBLOB")
+    @Column(name = "image_data")
     private byte[] imageLob;
 
     @Column(nullable = false)
