@@ -45,6 +45,7 @@ public class OrderServiceImpl implements OrderService {
 	private final CustomerOrderRepository orderRepository;
 	private final MenuItemRepository menuItemRepository;
 	private final RestaurantTableRepository tableRepository;
+	private final com.khanabook.pos.repository.TableBookingRepository bookingRepository;
 	private final KptRepository kptRepository;
 	private final WhatsAppService whatsAppService;
 
@@ -69,6 +70,23 @@ public class OrderServiceImpl implements OrderService {
 			order.setRestaurantTable(table);
 			table.setStatus(TableStatus.OCCUPIED);
 			tableRepository.save(table);
+
+			// Link to active booking if exists
+			LocalDateTime now = LocalDateTime.now();
+			List<com.khanabook.pos.model.TableBooking> bookings = bookingRepository
+					.findByRestaurantTableIdAndStatusInAndBookingDateTimeBetween(
+							table.getId(),
+							Arrays.asList(com.khanabook.pos.model.BookingStatus.PENDING,
+									com.khanabook.pos.model.BookingStatus.CONFIRMED),
+							now.minusHours(2),
+							now.plusHours(2));
+
+			if (!bookings.isEmpty()) {
+				com.khanabook.pos.model.TableBooking booking = bookings.get(0);
+				booking.setStatus(com.khanabook.pos.model.BookingStatus.SEATED);
+				booking.setCustomerOrder(order);
+				bookingRepository.save(booking);
+			}
 		}
 
 		// Set created by user
@@ -195,41 +213,41 @@ public class OrderServiceImpl implements OrderService {
 
 		// Update timestamps based on status
 		switch (newStatus) {
-		case CONFIRMED -> {
-			order.setConfirmedAt(LocalDateTime.now());
-			order.setIsEditable(false); // Lock editing
-		}
-		case IN_KITCHEN -> {
-			order.setSentToKitchenAt(LocalDateTime.now());
-			order.calculateEstimatedReadyTime();
-		}
-		case READY_TO_SERVE -> {
-			order.setReadyAt(LocalDateTime.now());
-			// Calculate actual KPT
-			if (order.getSentToKitchenAt() != null) {
-				long actualMinutes = ChronoUnit.MINUTES.between(order.getSentToKitchenAt(), order.getReadyAt());
-				order.setActualKptMinutes((int) actualMinutes);
+			case CONFIRMED -> {
+				order.setConfirmedAt(LocalDateTime.now());
+				order.setIsEditable(false); // Lock editing
 			}
-		}
-		case SERVED -> order.setServedAt(LocalDateTime.now());
-		case COMPLETED -> {
-			order.setCompletedAt(LocalDateTime.now());
-			// Free up table
-			if (order.getRestaurantTable() != null) {
-				RestaurantTable table = order.getRestaurantTable();
-				table.setStatus(TableStatus.AVAILABLE);
-				tableRepository.save(table);
+			case IN_KITCHEN -> {
+				order.setSentToKitchenAt(LocalDateTime.now());
+				order.calculateEstimatedReadyTime();
 			}
-		}
-		case CANCELLED -> {
-			// Free up table
-			if (order.getRestaurantTable() != null) {
-				RestaurantTable table = order.getRestaurantTable();
-				table.setStatus(TableStatus.AVAILABLE);
-				tableRepository.save(table);
+			case READY_TO_SERVE -> {
+				order.setReadyAt(LocalDateTime.now());
+				// Calculate actual KPT
+				if (order.getSentToKitchenAt() != null) {
+					long actualMinutes = ChronoUnit.MINUTES.between(order.getSentToKitchenAt(), order.getReadyAt());
+					order.setActualKptMinutes((int) actualMinutes);
+				}
 			}
-		}
-		default -> throw new IllegalArgumentException("Unexpected value: " + newStatus);
+			case SERVED -> order.setServedAt(LocalDateTime.now());
+			case COMPLETED -> {
+				order.setCompletedAt(LocalDateTime.now());
+				// Free up table
+				if (order.getRestaurantTable() != null) {
+					RestaurantTable table = order.getRestaurantTable();
+					table.setStatus(TableStatus.AVAILABLE);
+					tableRepository.save(table);
+				}
+			}
+			case CANCELLED -> {
+				// Free up table
+				if (order.getRestaurantTable() != null) {
+					RestaurantTable table = order.getRestaurantTable();
+					table.setStatus(TableStatus.AVAILABLE);
+					tableRepository.save(table);
+				}
+			}
+			default -> throw new IllegalArgumentException("Unexpected value: " + newStatus);
 		}
 
 		order = orderRepository.save(order);
@@ -314,12 +332,12 @@ public class OrderServiceImpl implements OrderService {
 
 	private void validateStatusTransition(OrderStatus current, OrderStatus next) {
 		List<OrderStatus> validTransitions = switch (current) {
-		case PENDING -> Arrays.asList(OrderStatus.CONFIRMED, OrderStatus.CANCELLED);
-		case CONFIRMED -> Arrays.asList(OrderStatus.IN_KITCHEN, OrderStatus.CANCELLED);
-		case IN_KITCHEN -> Arrays.asList(OrderStatus.READY_TO_SERVE, OrderStatus.CANCELLED);
-		case READY_TO_SERVE -> Arrays.asList(OrderStatus.SERVED, OrderStatus.CANCELLED);
-		case SERVED -> List.of(OrderStatus.COMPLETED);
-		case COMPLETED, CANCELLED -> List.of(); // Terminal states
+			case PENDING -> Arrays.asList(OrderStatus.CONFIRMED, OrderStatus.CANCELLED);
+			case CONFIRMED -> Arrays.asList(OrderStatus.IN_KITCHEN, OrderStatus.CANCELLED);
+			case IN_KITCHEN -> Arrays.asList(OrderStatus.READY_TO_SERVE, OrderStatus.CANCELLED);
+			case READY_TO_SERVE -> Arrays.asList(OrderStatus.SERVED, OrderStatus.CANCELLED);
+			case SERVED -> List.of(OrderStatus.COMPLETED);
+			case COMPLETED, CANCELLED -> List.of(); // Terminal states
 		};
 
 		if (!validTransitions.contains(next)) {

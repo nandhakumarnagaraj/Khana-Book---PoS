@@ -13,7 +13,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Service @RequiredArgsConstructor
+@Service
+@RequiredArgsConstructor
 public class ReportServiceImpl implements ReportService {
 
     private final CustomerOrderRepository customerOrderRepository;
@@ -33,13 +34,13 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public Map<String, Long> getOrderCountByStatus() {
-        return customerOrderRepository.findAll().stream()
-                .collect(Collectors.groupingBy(order -> order.getStatus().name(), Collectors.counting()));
+        return customerOrderRepository.countByStatus().stream()
+                .collect(Collectors.toMap(obj -> ((OrderStatus) obj[0]).name(), obj -> (Long) obj[1]));
     }
 
     @Override
     public Map<OrderType, Long> getOrderCountByType() {
-        return customerOrderRepository.findAll().stream()
-                .collect(Collectors.groupingBy(CustomerOrder::getOrderType, Collectors.counting()));
+        return customerOrderRepository.countByType().stream()
+                .collect(Collectors.toMap(obj -> (OrderType) obj[0], obj -> (Long) obj[1]));
     }
 }

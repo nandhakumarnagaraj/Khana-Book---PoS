@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController @RequestMapping("/api/menu-items")
-@RequiredArgsConstructor @Tag(name = "Menu Items", description = "Menu item management endpoints")
+@RestController
+@RequestMapping("/api/menu-items")
+@RequiredArgsConstructor
+@Tag(name = "Menu Items", description = "Menu item management endpoints")
 @SecurityRequirement(name = "bearerAuth")
 public class MenuItemController {
 
@@ -43,7 +45,8 @@ public class MenuItemController {
 
     @GetMapping("/category/{categoryId}/paged")
     @Operation(summary = "Get menu items by category ID with pagination")
-    public ResponseEntity<Page<MenuItem>> getMenuItemsByCategoryIdPaged(@PathVariable Long categoryId, Pageable pageable) {
+    public ResponseEntity<Page<MenuItem>> getMenuItemsByCategoryIdPaged(@PathVariable Long categoryId,
+            Pageable pageable) {
         return ResponseEntity.ok(menuItemService.getMenuItemsByCategoryIdPaged(categoryId, pageable));
     }
 
@@ -56,25 +59,29 @@ public class MenuItemController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
     @Operation(summary = "Create a new menu item")
     public ResponseEntity<MenuItem> createMenuItem(@Valid @RequestBody MenuItem menuItem) {
         return ResponseEntity.status(HttpStatus.CREATED).body(menuItemService.createMenuItem(menuItem));
     }
 
-    @PutMapping("/{id}") @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
     @Operation(summary = "Update an existing menu item")
     public ResponseEntity<MenuItem> updateMenuItem(@PathVariable Long id, @Valid @RequestBody MenuItem menuItem) {
         return ResponseEntity.ok(menuItemService.updateMenuItem(id, menuItem));
     }
 
-    @DeleteMapping("/{id}") @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
     @Operation(summary = "Delete a menu item")
     public ResponseEntity<Void> deleteMenuItem(@PathVariable Long id) {
         menuItemService.deleteMenuItem(id);
         return ResponseEntity.noContent().build();
     }
 
-    @PatchMapping("/{id}/availability") @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
+    @PatchMapping("/{id}/availability")
+    @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
     @Operation(summary = "Toggle menu item availability")
     public ResponseEntity<MenuItem> toggleMenuItemAvailability(@PathVariable Long id, @RequestParam boolean available) {
         return ResponseEntity.ok(menuItemService.toggleMenuItemAvailability(id, available));

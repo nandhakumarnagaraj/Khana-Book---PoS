@@ -18,16 +18,23 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-@Service @RequiredArgsConstructor
+@Service
+@RequiredArgsConstructor
 public class MenuItemServiceImpl implements MenuItemService {
 
     private final MenuItemRepository menuItemRepository;
     private final CategoryRepository categoryRepository;
 
-    @Override @Transactional @CacheEvict(value = "menuItems", allEntries = true)
+    @Override
+    @Transactional
+    @CacheEvict(value = "menuItems", allEntries = true)
     public MenuItem createMenuItem(MenuItem menuItem) {
+        if (menuItem.getCategory() == null || menuItem.getCategory().getId() == null) {
+            throw new IllegalArgumentException("Category ID is required");
+        }
         Category category = categoryRepository.findById(menuItem.getCategory().getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + menuItem.getCategory().getId()));
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Category not found with id: " + menuItem.getCategory().getId()));
         menuItem.setCategory(category);
         menuItem.setCreatedAt(LocalDateTime.now());
         return menuItemRepository.save(menuItem);
@@ -38,33 +45,40 @@ public class MenuItemServiceImpl implements MenuItemService {
         return menuItemRepository.findById(id);
     }
 
-    @Override @Cacheable("menuItems")
+    @Override
+    @Cacheable("menuItems")
     public Page<MenuItem> getAllMenuItems(Pageable pageable) {
         return menuItemRepository.findAll(pageable);
     }
 
-    @Override @Cacheable(value = "menuItems", key = "'available_' + #pageable.pageNumber + '_' + #pageable.pageSize")
+    @Override
+    @Cacheable(value = "menuItems", key = "'available_' + #pageable.pageNumber + '_' + #pageable.pageSize")
     public Page<MenuItem> getAvailableMenuItems(Pageable pageable) {
         return menuItemRepository.findByAvailableTrue(pageable);
     }
 
-    @Override @Cacheable(value = "menuItems", key = "'category_' + #categoryId")
+    @Override
+    @Cacheable(value = "menuItems", key = "'category_' + #categoryId")
     public List<MenuItem> getMenuItemsByCategoryId(Long categoryId) {
         return menuItemRepository.findByCategoryIdAndAvailableTrue(categoryId);
     }
 
-    @Override @Cacheable(value = "menuItems", key = "'category_paged_' + #categoryId + '_' + #pageable.pageNumber + '_' + #pageable.pageSize")
+    @Override
+    @Cacheable(value = "menuItems", key = "'category_paged_' + #categoryId + '_' + #pageable.pageNumber + '_' + #pageable.pageSize")
     public Page<MenuItem> getMenuItemsByCategoryIdPaged(Long categoryId, Pageable pageable) {
         return menuItemRepository.findByCategoryId(categoryId, pageable);
     }
 
-    @Override @Transactional @CacheEvict(value = "menuItems", allEntries = true)
+    @Override
+    @Transactional
+    @CacheEvict(value = "menuItems", allEntries = true)
     public MenuItem updateMenuItem(Long id, MenuItem updatedMenuItem) {
         MenuItem existingMenuItem = menuItemRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Menu Item not found with id: " + id));
 
         Category category = categoryRepository.findById(updatedMenuItem.getCategory().getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + updatedMenuItem.getCategory().getId()));
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Category not found with id: " + updatedMenuItem.getCategory().getId()));
 
         existingMenuItem.setName(updatedMenuItem.getName());
         existingMenuItem.setDescription(updatedMenuItem.getDescription());
@@ -79,7 +93,9 @@ public class MenuItemServiceImpl implements MenuItemService {
         return menuItemRepository.save(existingMenuItem);
     }
 
-    @Override @Transactional @CacheEvict(value = "menuItems", allEntries = true)
+    @Override
+    @Transactional
+    @CacheEvict(value = "menuItems", allEntries = true)
     public void deleteMenuItem(Long id) {
         if (!menuItemRepository.existsById(id)) {
             throw new ResourceNotFoundException("Menu Item not found with id: " + id);
@@ -87,7 +103,9 @@ public class MenuItemServiceImpl implements MenuItemService {
         menuItemRepository.deleteById(id);
     }
 
-    @Override @Transactional @CacheEvict(value = "menuItems", allEntries = true)
+    @Override
+    @Transactional
+    @CacheEvict(value = "menuItems", allEntries = true)
     public MenuItem toggleMenuItemAvailability(Long id, boolean available) {
         MenuItem menuItem = menuItemRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Menu Item not found with id: " + id));

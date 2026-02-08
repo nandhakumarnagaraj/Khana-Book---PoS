@@ -13,7 +13,12 @@ import java.util.List;
 @Repository
 public interface TableBookingRepository extends JpaRepository<TableBooking, Long> {
     Page<TableBooking> findByStatus(BookingStatus status, Pageable pageable);
+
     List<TableBooking> findByBookingDateTimeBetween(LocalDateTime start, LocalDateTime end);
+
     List<TableBooking> findByRestaurantTableIdAndBookingDateTimeBetween(
-        Long tableId, LocalDateTime start, LocalDateTime end);
+            Long tableId, LocalDateTime start, LocalDateTime end);
+
+    List<TableBooking> findByRestaurantTableIdAndStatusInAndBookingDateTimeBetween(
+            Long tableId, List<BookingStatus> statuses, LocalDateTime start, LocalDateTime end);
 }

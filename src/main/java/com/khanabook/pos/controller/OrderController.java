@@ -17,14 +17,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-@RestController @RequestMapping("/api/orders")
-@RequiredArgsConstructor @Tag(name = "Orders", description = "Order management endpoints")
+@RestController
+@RequestMapping("/api/orders")
+@RequiredArgsConstructor
+@Tag(name = "Orders", description = "Order management endpoints")
 @SecurityRequirement(name = "bearerAuth")
 public class OrderController {
 
     private final OrderService orderService;
 
-    @PostMapping @PreAuthorize("hasAnyRole('WAITER', 'ADMIN', 'MANAGER')")
+    @PostMapping
+    @PreAuthorize("hasAnyRole('WAITER', 'ADMIN', 'MANAGER')")
     @Operation(summary = "Create manual order (waiter)")
     public ResponseEntity<OrderResponse> createOrder(@Valid @RequestBody OrderRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -44,7 +47,8 @@ public class OrderController {
         return ResponseEntity.ok(orderService.getOrderById(id));
     }
 
-    @GetMapping @PreAuthorize("hasAnyRole('WAITER', 'ADMIN', 'MANAGER')")
+    @GetMapping
+    @PreAuthorize("hasAnyRole('WAITER', 'ADMIN', 'MANAGER')")
     @Operation(summary = "Get all orders with pagination")
     public ResponseEntity<Page<OrderResponse>> getAllOrders(Pageable pageable) {
         return ResponseEntity.ok(orderService.getAllOrders(pageable));
@@ -60,6 +64,7 @@ public class OrderController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('WAITER', 'ADMIN', 'MANAGER')")
     @Operation(summary = "Update order (within edit window)")
     public ResponseEntity<OrderResponse> updateOrder(
             @PathVariable Long id,

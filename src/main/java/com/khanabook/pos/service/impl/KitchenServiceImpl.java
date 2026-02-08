@@ -18,16 +18,17 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service @RequiredArgsConstructor
+@Service
+@RequiredArgsConstructor
 public class KitchenServiceImpl implements KitchenService {
 
     private final CustomerOrderRepository orderRepository;
 
     @Override
+    @Transactional
     public List<KitchenOrderResponse> getPendingOrders() {
         List<CustomerOrder> orders = orderRepository.findByStatusInWithItems(
-                Arrays.asList(OrderStatus.CONFIRMED, OrderStatus.IN_KITCHEN)
-        );
+                Arrays.asList(OrderStatus.CONFIRMED, OrderStatus.IN_KITCHEN));
 
         return orders.stream()
                 .map(this::convertToKitchenResponse)
@@ -36,17 +37,18 @@ public class KitchenServiceImpl implements KitchenService {
     }
 
     @Override
+    @Transactional
     public List<KitchenOrderResponse> getActiveOrders() {
         List<CustomerOrder> orders = orderRepository.findByStatusInWithItems(
-                Arrays.asList(OrderStatus.IN_KITCHEN, OrderStatus.READY_TO_SERVE)
-        );
+                Arrays.asList(OrderStatus.IN_KITCHEN, OrderStatus.READY_TO_SERVE));
 
         return orders.stream()
                 .map(this::convertToKitchenResponse)
                 .collect(Collectors.toList());
     }
 
-    @Override @Transactional
+    @Override
+    @Transactional
     public CustomerOrder markOrderReady(Long orderId) {
         CustomerOrder order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found"));
@@ -62,15 +64,15 @@ public class KitchenServiceImpl implements KitchenService {
         if (order.getSentToKitchenAt() != null) {
             long actualMinutes = ChronoUnit.MINUTES.between(
                     order.getSentToKitchenAt(),
-                    order.getReadyAt()
-            );
+                    order.getReadyAt());
             order.setActualKptMinutes((int) actualMinutes);
         }
 
         return orderRepository.save(order);
     }
 
-    @Override @Transactional
+    @Override
+    @Transactional
     public CustomerOrder updateKpt(Long orderId, Integer estimatedMinutes) {
         CustomerOrder order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found"));
@@ -88,8 +90,8 @@ public class KitchenServiceImpl implements KitchenService {
     private KitchenOrderResponse convertToKitchenResponse(CustomerOrder order) {
         KitchenOrderResponse response = new KitchenOrderResponse();
         response.setOrderId(order.getId());
-        response.setTableName(order.getRestaurantTable() != null ?
-                order.getRestaurantTable().getName() : "Takeaway/Delivery");
+        response.setTableName(
+                order.getRestaurantTable() != null ? order.getRestaurantTable().getName() : "Takeaway/Delivery");
         response.setOrderType(order.getOrderType());
         response.setStatus(order.getStatus());
         response.setCreatedAt(order.getCreatedAt());
@@ -100,8 +102,7 @@ public class KitchenServiceImpl implements KitchenService {
 
         List<KitchenOrderResponse.KitchenItemDto> items = order.getOrderItems().stream()
                 .map(item -> {
-                    KitchenOrderResponse.KitchenItemDto dto = 
-                        new KitchenOrderResponse.KitchenItemDto();
+                    KitchenOrderResponse.KitchenItemDto dto = new KitchenOrderResponse.KitchenItemDto();
                     dto.setMenuItemName(item.getMenuItem().getName());
                     dto.setQuantity(item.getQuantity());
                     dto.setSpecialInstructions(item.getSpecialInstructions());
