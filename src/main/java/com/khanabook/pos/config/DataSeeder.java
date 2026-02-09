@@ -36,35 +36,6 @@ public class DataSeeder {
                         createUser("superadmin", "SuperAdmin@123", "superadmin@khanabook.com",
                                         "+919999999999", "Super Administrator", Role.ADMIN);
 
-                        // 2. ADMIN
-                        createUser("admin", "Admin@123", "admin@khanabook.com",
-                                        "+919999999998", "Restaurant Admin", Role.ADMIN);
-
-                        // 3. MANAGER
-                        createUser("manager", "Manager@123", "manager@khanabook.com",
-                                        "+919999999997", "Restaurant Manager", Role.MANAGER);
-
-                        // 4. CHEF
-                        createUser("chef_ravi", "Chef@123", "chef@khanabook.com",
-                                        "+919999999996", "Chef Ravi Kumar", Role.CHEF);
-
-                        // 5. WAITER
-                        createUser("waiter_rahul", "Waiter@123", "waiter@khanabook.com",
-                                        "+919999999995", "Rahul Sharma", Role.WAITER);
-
-                        // 6. CASHIER
-                        createUser("cashier_priya", "Cashier@123", "cashier@khanabook.com",
-                                        "+919999999994", "Priya Singh", Role.CASHIER);
-
-                        // Additional users with multiple roles
-                        createUser("owner", "Owner@123", "owner@khanabook.com",
-                                        "+919999999993", "Restaurant Owner",
-                                        Role.ADMIN);
-
-                        createUser("head_chef", "HeadChef@123", "headchef@khanabook.com",
-                                        "+919999999992", "Head Chef Amit",
-                                        Role.CHEF);
-
                         log.info("User seeding completed successfully!");
                 };
         }

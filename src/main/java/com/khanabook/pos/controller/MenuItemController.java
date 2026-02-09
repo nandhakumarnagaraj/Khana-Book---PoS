@@ -15,6 +15,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.http.MediaType;
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/menu-items")
@@ -62,6 +65,16 @@ public class MenuItemController {
     @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
     @Operation(summary = "Create a new menu item")
     public ResponseEntity<MenuItem> createMenuItem(@Valid @RequestBody MenuItem menuItem) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(menuItemService.createMenuItem(menuItem));
+    }
+
+    @PostMapping(value = "/with-image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
+    @Operation(summary = "Create a new menu item with image file")
+    public ResponseEntity<MenuItem> createMenuItemWithImage(
+            @RequestParam("image") MultipartFile image,
+            @ModelAttribute MenuItem menuItem) throws IOException {
+        menuItem.setImageLob(image.getBytes());
         return ResponseEntity.status(HttpStatus.CREATED).body(menuItemService.createMenuItem(menuItem));
     }
 

@@ -30,7 +30,7 @@ public class MenuItem {
     private Category category;
 
     @Lob
-    @Column(name = "image_data")
+    @Column(name = "image_data", columnDefinition = "LONGBLOB")
     private byte[] imageLob;
 
     @Column(nullable = false)

@@ -355,8 +355,8 @@ public class OrderServiceImpl implements OrderService {
 		response.setEstimatedReadyTime(order.getEstimatedReadyTime());
 		response.setEstimatedKptMinutes(order.getEstimatedKptMinutes());
 		response.setIsEditable(order.isEditAllowed());
-		response.setIsQrOrder(order.getIsQrOrder());
-		response.setWhatsappBillSent(order.getWhatsappBillSent());
+		response.setIsQrOrder(order.getIsQrOrder() != null ? order.getIsQrOrder() : false);
+		response.setWhatsappBillSent(order.getWhatsappBillSent() != null ? order.getWhatsappBillSent() : false);
 
 		if (order.getRestaurantTable() != null) {
 			response.setTableName(order.getRestaurantTable().getName());

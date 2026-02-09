@@ -15,7 +15,7 @@ public class RegisterRequest {
 
     @NotBlank
     @Size(min = 8, max = 100)
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[ @#$%^&+=]).{8,}$", message = "Password must contain uppercase, lowercase, digit and special character")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=]).{8,}$", message = "Password must contain uppercase, lowercase, digit and special character")
     private String password;
 
     @Email

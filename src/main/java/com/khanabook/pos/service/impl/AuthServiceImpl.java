@@ -53,10 +53,8 @@ public class AuthServiceImpl implements AuthService {
 
         user = userRepository.save(user);
 
-        // Generate token immediately
-        String token = jwtUtil.generateToken(user);
-
-        return new AuthResponse(token, "Bearer", user.getId(), user.getUsername(), user.getEmail(),
+        // Token generation is handled only during login
+        return new AuthResponse(null, "Bearer", user.getId(), user.getUsername(), user.getEmail(),
                 user.getRole().name());
     }
 
